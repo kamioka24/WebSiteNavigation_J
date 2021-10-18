@@ -1,5 +1,7 @@
 package com.example.websitenavigation_j.ui.home;
 
+import android.webkit.WebView;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

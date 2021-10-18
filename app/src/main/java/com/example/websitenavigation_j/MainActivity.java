@@ -1,6 +1,10 @@
 package com.example.websitenavigation_j;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebViewClient;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -16,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +38,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        binding.button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                binding.webView.loadUrl("https://techbowl.co.jp/techtrain/mypage");
+            }
+        });
 
+        // タップしたときにブラウザを起動しない
+        binding.webView.setWebViewClient(new WebViewClient());
+        binding.webView.getSettings().setJavaScriptEnabled(true);
     }
 
 }
