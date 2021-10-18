@@ -2,8 +2,10 @@ package com.example.websitenavigation_j;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -44,8 +46,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.progressBar.setVisibility(View.INVISIBLE);
+
         // タップしたときにブラウザを起動しない
-        binding.webView.setWebViewClient(new WebViewClient());
+        binding.webView.setWebViewClient(new WebViewClient() {
+
+            // web ページの読み込み開始
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                binding.progressBar.setVisibility(View.VISIBLE);
+            }
+
+            // web ページの読み込み終了
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                binding.progressBar.setVisibility(View.INVISIBLE);
+            }
+        });
         binding.webView.getSettings().setJavaScriptEnabled(true);
     }
 
